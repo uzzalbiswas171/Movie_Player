@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 class BottomNavigationBarItemHomeScreen extends StatefulWidget {
   const BottomNavigationBarItemHomeScreen({Key? key}) : super(key: key);
+
   @override
   State<BottomNavigationBarItemHomeScreen> createState() =>
       _BottomNavigationBarItemHomeScreenState();
@@ -13,6 +14,7 @@ class BottomNavigationBarItemHomeScreen extends StatefulWidget {
 
 class _BottomNavigationBarItemHomeScreenState
     extends State<BottomNavigationBarItemHomeScreen> {
+
   @override
   void initState() {
     ///....Call provider .///
@@ -20,14 +22,17 @@ class _BottomNavigationBarItemHomeScreenState
     // TODO: implement initState
     super.initState();
   }
-  int lengt=0;
+
+  int page_valu=0;
 
   @override
   Widget build(BuildContext context) {
     final Movie_list = Provider
         .of<CustomProvider>(context)
         .Movie_list;
-    double valu=Movie_list.length/1000;
+   double value=  Movie_list.length / 1000;
+    // print(valu);
+    // int lengt=valu.toInt();
 
     return SafeArea(
       child: Column(
@@ -44,7 +49,7 @@ class _BottomNavigationBarItemHomeScreenState
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     mainAxisExtent: 200),
-                itemCount:lengt,
+                itemCount:value.toInt()+page_valu,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -79,17 +84,17 @@ class _BottomNavigationBarItemHomeScreenState
                   padding: const EdgeInsets.all(5.0),
                   child: InkWell(
                     onTap: () {
-                      if(lengt >= 5){
+
+                      if(page_valu==0){
                         setState(() {
-                          lengt=5;
-                          print(lengt);
+                          page_valu=0;
                         });
                       }else{
                         setState(() {
-                          lengt=lengt-valu.toInt();
-                          print(lengt);
+                          page_valu-=10;
                         });
                       }
+
                     },
                     child: Container(
                         alignment: Alignment.center,
@@ -106,8 +111,7 @@ class _BottomNavigationBarItemHomeScreenState
                   child: InkWell(
                     onTap: () {
                       setState(() {
-                        lengt=lengt+5;
-                        print(lengt);
+                        page_valu+=10;
                       });
                     },
                     child: Container(
